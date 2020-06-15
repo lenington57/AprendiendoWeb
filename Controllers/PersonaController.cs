@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AprendiendoWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,29 @@ namespace AprendiendoWeb.Controllers
 {
     public class PersonaController : Controller
     {
+        public List<Persona> personas;
         // GET: Persona
         public ActionResult Index()
         {
-            return View();
+            personas = new List<Persona>();
+            Persona persona = new Persona()
+            {
+                Id=1,
+                Nombre="Lenington",
+                FechaNacimiento=DateTime.Now,
+                Telefono="000-000-0000"
+            };
+            Persona personaa = new Persona()
+            {
+                Id = 2,
+                Nombre = "Lenington",
+                FechaNacimiento = DateTime.Now,
+                Telefono = "000-000-0000"
+            };
+
+            personas.Add(persona);
+            personas.Add(personaa);
+            return View(personas);
         }
 
         // GET: Persona/Details/5

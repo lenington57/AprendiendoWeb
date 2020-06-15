@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@3.3.4",
+      "destination": "wwwroot/twitter-bootstrap/"
+    },
+    {
+      "library": "font-awesome@4.3.0",
+      "destination": "wwwroot/font-awesome/"
+    },
+    {
+      "library": "admin-lte@2.1.0-alpha-1",
+      "destination": "wwwroot/admin-lte/"
+    },
+    {
+      "library": "ionicons@2.0.1",
+      "destination": "wwwroot/ionicons/"
+    }
+  ]
+}
