@@ -10,7 +10,7 @@ namespace AprendiendoWeb.Controllers
 {
     public class EstudianteController : Controller
     {
-        private List<Estudiante> estudiantes;
+        private static List<Estudiante> estudiantes;
         // GET: Estudiante
         public ActionResult Index()
         {
@@ -104,18 +104,22 @@ namespace AprendiendoWeb.Controllers
         // POST: Estudiante/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Estudiante modelo)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    estudiantes.Add(modelo);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+                return View(modelo);
             }
+            return View(modelo);
         }
 
         // GET: Estudiante/Edit/5

@@ -17,6 +17,10 @@
     {
       "library": "ionicons@2.0.1",
       "destination": "wwwroot/ionicons/"
+    },
+    {
+      "library": "jquery@2.1.4",
+      "destination": "wwwroot/jquery/"
     }
   ]
 }
