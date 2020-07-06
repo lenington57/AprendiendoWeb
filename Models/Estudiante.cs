@@ -9,7 +9,6 @@ namespace AprendiendoWeb.Models
     public class Estudiante
     {
         [Key]
-        [Required(ErrorMessage = "El campo {0} no puede estar en blanco.")]
         public int Matricula { get; set; }
         public string Cedula { get; set; }
         public DateTime FechaNacimiento { get; set; }

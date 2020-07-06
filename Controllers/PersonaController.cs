@@ -3,42 +3,80 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AprendiendoWeb.Models;
+using DNTBreadCrumb.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using ReflectionIT.Mvc.Paging;
 
 namespace AprendiendoWeb.Controllers
 {
+    [BreadCrumb(Title = "Persona", Url = "/Persona/Index", Order = 0)]
     public class PersonaController : Controller
     {
         private static List<Persona> personas;
         // GET: Persona
-        public ActionResult Index()
+        [BreadCrumb(Title = "Listado de Personas", Order = 1)]
+        public ActionResult Index(string filter, int page = 1,
+                                           string sortExpression = "Nombre")
         {
             if (personas == null)
             {
-
                 personas = new List<Persona>();
-                Persona persona = new Persona()
+                int i;
+                for (i = 1; i < 6; i++)
                 {
-                    Id = 1,
-                    Nombre = "Lenington",
-                    FechaNacimiento = DateTime.Now,
-                    Telefono = "000-000-0000"
+                    Persona persona = new Persona()
+                    {
+                        Id = i,
+                        Nombre = "Lenington",
+                        FechaNacimiento = DateTime.Now,
+                        Telefono = "000-000-0000"
+                    };
+                    personas.Add(persona);
                 };
-                Persona personaa = new Persona()
+
+                for (i = 6; i < 11; i++)
                 {
-                    Id = 2,
-                    Nombre = "Lenington",
-                    FechaNacimiento = DateTime.Now,
-                    Telefono = "000-000-0000"
-                };
-                personas.Add(persona);
-                personas.Add(personaa);
+                    Persona personaDos = new Persona()
+                    {
+                        Id = i,
+                        Nombre = "Pedro",
+                        FechaNacimiento = DateTime.Now,
+                        Telefono = "000-000-0000"
+                    };
+                    personas.Add(personaDos);
+                }
+                for (i = 11; i < 16; i++)
+                {
+                    Persona personaTres = new Persona()
+                    {
+                        Id = i,
+                        Nombre = "Pablo",
+                        FechaNacimiento = DateTime.Now,
+                        Telefono = "000-000-0000"
+                    };
+                    personas.Add(personaTres);
+                }
             }
-            return View(personas);
+
+            List<Persona> filtrada = personas;
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                filtrada = personas.FindAll(x => x.Nombre.ToUpper().Contains(filter.ToUpper()));
+            }
+
+            var model = PagingList.Create(filtrada, 5, page, sortExpression, "Nombre");
+            model.RouteValue = new RouteValueDictionary {
+                            { "filter", filter
+}
+            };
+            model.Action = "Index";
+            return View(model);
         }
 
         // GET: Persona/Details/5
+        [BreadCrumb(Title = "Detalle de la Persona", Order = 2)]
         public ActionResult Details(int id)
         {
             var modelo = personas.Find(c => c.Id == id);
@@ -52,6 +90,7 @@ namespace AprendiendoWeb.Controllers
         }
 
         // GET: Persona/Create
+        [BreadCrumb(Title = "Crear Persona", Order = 3)]
         public ActionResult Create()
         {
             return View();
@@ -69,7 +108,7 @@ namespace AprendiendoWeb.Controllers
                 {
                     personas.Add(modelo);
                     return RedirectToAction(nameof(Index));
-                }                
+                }
             }
             catch
             {
@@ -79,6 +118,7 @@ namespace AprendiendoWeb.Controllers
         }
 
         // GET: Persona/Edit/5
+        [BreadCrumb(Title = "Editar Persona", Order = 3)]
         public ActionResult Edit(int id)
         {
             var modelo = personas.Find(c => c.Id == id);
@@ -115,6 +155,7 @@ namespace AprendiendoWeb.Controllers
         }
 
         // GET: Persona/Delete/5
+        [BreadCrumb(Title = "Eliminar Persona", Order = 3)]
         public ActionResult Delete(int id)
         {
             var modelo = personas.Find(c => c.Id == id);

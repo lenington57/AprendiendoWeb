@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AprendiendoWeb.Models;
+using DNTBreadCrumb.Core;
 
 namespace AprendiendoWeb.Controllers
 {
@@ -24,6 +25,12 @@ namespace AprendiendoWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [BreadCrumb(Title = "AdminLte", Order = 0)]
+        public IActionResult AdminLte()
+        {
+            return View();
         }
     }
 }

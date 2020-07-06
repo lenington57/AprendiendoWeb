@@ -1,4 +1,4 @@
-﻿@model AprendiendoWeb.Models.Estudiante
+﻿@model AprendiendoWeb.Models.Empleado
 
 @{
     ViewData["Title"] = "Create";
@@ -7,16 +7,16 @@
 
 <h1>Create</h1>
 <div class="box box-info">
-    <h4>Estudiante</h4>
+    <h4>Empleado</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Matricula" class="control-label"></label>
-                    <input asp-for="Matricula" class="form-control" />
-                    <span asp-validation-for="Matricula" class="text-danger"></span>
+                    <label asp-for="Codigo" class="control-label"></label>
+                    <input asp-for="Codigo" class="form-control" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Cedula" class="control-label"></label>
@@ -54,11 +54,6 @@
                     <span asp-validation-for="EstadoCivil" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Ocupacion" class="control-label"></label>
-                    <input asp-for="Ocupacion" class="form-control" />
-                    <span asp-validation-for="Ocupacion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="TipoSangre" class="control-label"></label>
                     <input asp-for="TipoSangre" class="form-control" />
                     <span asp-validation-for="TipoSangre" class="text-danger"></span>
@@ -84,29 +79,39 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="NombrePadre" class="control-label"></label>
-                    <input asp-for="NombrePadre" class="form-control" />
-                    <span asp-validation-for="NombrePadre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NombreMadre" class="control-label"></label>
-                    <input asp-for="NombreMadre" class="form-control" />
-                    <span asp-validation-for="NombreMadre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="Direccion" class="control-label"></label>
                     <input asp-for="Direccion" class="form-control" />
                     <span asp-validation-for="Direccion" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="TipoColegio" class="control-label"></label>
-                    <input asp-for="TipoColegio" class="form-control" />
-                    <span asp-validation-for="TipoColegio" class="text-danger"></span>
+                    <label asp-for="SalarioMensual" class="control-label"></label>
+                    <input asp-for="SalarioMensual" class="form-control" />
+                    <span asp-validation-for="SalarioMensual" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Carrera" class="control-label"></label>
-                    <input asp-for="Carrera" class="form-control" />
-                    <span asp-validation-for="Carrera" class="text-danger"></span>
+                    <label asp-for="DepartamentoQuePertenece" class="control-label"></label>
+                    <input asp-for="DepartamentoQuePertenece" class="form-control" />
+                    <span asp-validation-for="DepartamentoQuePertenece" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NombreContactoEmergencia" class="control-label"></label>
+                    <input asp-for="NombreContactoEmergencia" class="form-control" />
+                    <span asp-validation-for="NombreContactoEmergencia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TelefonoContactoEmergencia" class="control-label"></label>
+                    <input asp-for="TelefonoContactoEmergencia" class="form-control" />
+                    <span asp-validation-for="TelefonoContactoEmergencia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AFPQuePertenece" class="control-label"></label>
+                    <input asp-for="AFPQuePertenece" class="form-control" />
+                    <span asp-validation-for="AFPQuePertenece" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ARSQuePertenece" class="control-label"></label>
+                    <input asp-for="ARSQuePertenece" class="form-control" />
+                    <span asp-validation-for="ARSQuePertenece" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Observaciones" class="control-label"></label>
@@ -123,4 +128,4 @@
     <div>
         <a asp-action="Index">Back to List</a>
     </div>
-</div>
+    </div>

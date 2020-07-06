@@ -1,54 +1,78 @@
-﻿@model IEnumerable<AprendiendoWeb.Models.Persona>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<AprendiendoWeb.Models.Persona>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_ProductLayout.cshtml";
 }
 
-<h1>Personas</h1>
+<div>
+    <form method="get" class="form-inline" asp-action="Index">
+        <input name="filter" class="form-control" placeholder="Filtro"
+               value="@Model.RouteValue["Filter"]" />
+        <button type="submit" class="btn  btn-default">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+        </button>
 
-<p>
-    <a asp-action="Create">Crear Nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaNacimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaNacimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <a asp-action="Create" class="btn btn-default btn-sm pull-right">
+            <span class="glyphicon glyphicon-plus" asp-action="Create"></span>  Crear Persona
+        </a>
+    </form><br />
+</div>
+
+<div class="box box-default">
+    <div class="box-header text-center">
+        <h4 class="text-center"><strong>Listado de Personas</strong></h4>
+        <hr />
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.SortableHeaderFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.SortableHeaderFor(model => model.FechaNacimiento)
+                </th>
+                <th>
+                    @Html.SortableHeaderFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.SortableHeaderFor(model => model.Telefono)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="box-footer">
+        <nav aria-label="Roles navigation example">
+            <vc:pager paging-list="@Model" />
+        </nav>
+    </div>
+    <div class="box-footer text-muted text-right">
+        <strong>P&aacute;gina @ViewBag.NumPagina</strong>
+    </div>
+</div>

@@ -1,4 +1,9 @@
-﻿
+﻿@{
+    string _controller = ViewContext.RouteData.Values["controller"].ToString();  //el controller que se invoca
+    string _action = ViewContext.RouteData.Values["action"].ToString();       //la acción del controller
+    string activo = string.Empty; // para controlar en la plantilla qué opción del menú se activa  o no.
+    string mnuSeguridad = ";Usuarios;Roles;";  //Colocar las opciones del menu de administracion delimitadas por ; al principo y al final.
+}
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -7,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Proyecto Reydi | Neysi | Lenington</title>
+    <title>Tareas MVC .NET Core</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="~/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -58,12 +63,19 @@ desired effect
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a asp-area="" asp-controller="Home" asp-action="AdminLte" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>Web</span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>Aprendiendo</b>Web</span>
             </a>
+
+            @*<a href="index2.html" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>A</b>Web</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>Aprendiendo</b>Web</span>
+                </a>*@
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -173,14 +185,14 @@ desired effect
                                 <!-- The user image in the navbar-->
                                 <img src="~/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image" />
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">Reydi-Neysi-Lenington</span>
+                                <span class="hidden-xs">Tareas MVC .NET Core</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="~/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                                     <p>
-                                        Reydi-Neysi-Lenington - Web Developer
+                                        Tareas MVC .NET Core - Web Developer
                                         <small>Miembro desde Jun. 2020</small>
                                     </p>
                                 </li>
@@ -227,7 +239,7 @@ desired effect
                         <img src="~/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p>Monogr&aacute;fico RNL</p>
+                        <p>Tareas MVC .NET Core</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i>En l&iacute;nea</a>
                     </div>
@@ -247,15 +259,35 @@ desired effect
                 <ul class="sidebar-menu">
                     <li class="header">HEADER</li>
                     <!-- Optionally, you can add icons to the links -->
-                    <li><a asp-area="" asp-controller="Persona" asp-action="Index"><i class='fa fa-link'></i> <span>Persona</span></a></li>
-                    <li><a asp-area="" asp-controller="Estudiante" asp-action="Index"><i class='fa fa-link'></i> <span>Estudiante</span></a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Privacy"><i class='fa fa-link'></i> <span>Empleado</span></a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Privacy"><i class='fa fa-link'></i> <span>Profesor</span></a></li>
-                    <li class="treeview">
-                        <a href="#"><i class='fa fa-link'></i> <span>Multinivel</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    @{activo = _controller.Equals("Persona") ? "active" : ""; }
+                    <li class="@activo"><a asp-area="" asp-controller="Persona" asp-action="Index"><i class='fa fa-male'></i> <span>Persona</span></a></li>
+
+                    @{activo = _controller.Equals("Estudiante") ? "active" : ""; }
+                    <li class="@activo"><a asp-area="" asp-controller="Estudiante" asp-action="Index"><i class='fa fa-university'></i> <span>Estudiante</span></a></li>
+
+                    @{activo = _controller.Equals("Empleado") ? "active" : ""; }
+                    <li class="@activo"><a asp-area="" asp-controller="Empleado" asp-action="Index"><i class='fa fa-group'></i> <span>Empleado</span></a></li>
+
+                    @{activo = _controller.Equals("Profesor") ? "active" : ""; }
+                    <li class="@activo"><a asp-area="" asp-controller="Profesor" asp-action="Index"><i class='fa fa-user'></i> <span>Profesor</span></a></li>
+
+                    @{ activo = mnuSeguridad.IndexOf(";" + _controller + ";") >= 0 ? "active" : ""; }
+                    <li class="treeview @activo">
+                        <a href="#"><i class='fa fa-tree'></i> <span>Multinivel</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="#">Link in level 2</a></li>
-                            <li><a href="#">Link in level 2</a></li>
+                            <li class="@activo">
+                                <a asp-area="" asp-controller="Home" asp-action="AdminLte">
+                                <i class='fa fa-user-secret'></i> 
+                                <span>Seguridad</span>
+                                </a>
+                            </li>
+
+                            <li class="@activo">
+                                <a asp-area="" asp-controller="Home" asp-action="AdminLte">
+                                    <i class='fa fa-unlock'></i>
+                                    <span>Roles</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul><!-- /.sidebar-menu -->
@@ -267,26 +299,25 @@ desired effect
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>
-                    Formulario
-                    <small>Lista</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Nivel</a></li>
-                    <li class="active">Aqu&iacute;</li>
-                </ol>
+                <h4><strong>Formularios</strong></h4>
+                @*<ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Nivel</a></li>
+                        <li class="active">Aqu&iacute;</li>
+                    </ol>*@
+                <breadcrumb asp-homepage-title="Inicio"
+                            asp-homepage-url="@Url.Action("Index","Home")"
+                            asp-bootstrap-version="V3"
+                            asp-homepage-glyphicon="glyphicon glyphicon-home">
+                </breadcrumb>
             </section>
 
             <!-- Main content -->
-            <section class="content">
+            <section class="content container-fluid">
 
-                <div class="container">
-                    <partial name="_CookieConsentPartial" />
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
-                </div>
-
+                <!--------------------------
+                | Your Page Content Here |
+                -------------------------->
+                @RenderBody()
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
         <!-- Main Footer -->
@@ -376,5 +407,6 @@ desired effect
           Both of these plugins are recommended to enhance the
           user experience. Slimscroll is required when using the
           fixed layout. -->
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

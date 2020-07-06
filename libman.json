@@ -21,6 +21,15 @@
     {
       "library": "jquery@2.1.4",
       "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "font-awesome@5.10.2",
+      "destination": "wwwroot/font-awesome/"
     }
-  ]
+  ,
+{
+  "library": "startbootstrap-sb-admin-2@3.3.7",
+  "destination": "wwwroot/startbootstrap-sb-admin-2/"
+}
+]
 }

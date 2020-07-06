@@ -1,4 +1,4 @@
-﻿@model ReflectionIT.Mvc.Paging.PagingList<AprendiendoWeb.Models.Estudiante>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<AprendiendoWeb.Models.Profesor>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,26 +9,26 @@
     <form method="get" class="form-inline" asp-action="Index">
         <input name="filter" class="form-control" placeholder="Filtro"
                value="@Model.RouteValue["Filter"]" />
-        <button type="submit" class="btn  btn-success">
+        <button type="submit" class="btn  btn-info">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
         </button>
 
-        <a asp-action="Create" class="btn btn-success btn-sm pull-right">
-            <span class="glyphicon glyphicon-plus"></span>  Crear Estudiante
+        <a asp-action="Create" class="btn btn-info btn-sm pull-right">
+            <span class="glyphicon glyphicon-plus"></span>  Crear Profesor
         </a>
     </form><br />
 </div>
 
-<div class="box box-success">
+<div class="box box-info">
     <div class="box-header text-center">
-        <h4 class="text-center"><strong>Listado de Estudiantes</strong></h4>
+        <h4 class="text-center"><strong>Listado de Profesores</strong></h4>
         <hr />
     </div>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.SortableHeaderFor(model => model.Matricula)
+                    @Html.SortableHeaderFor(model => model.Codigo)
                 </th>
                 <th>
                     @Html.SortableHeaderFor(model => model.Cedula)
@@ -44,6 +44,8 @@
                 </th>
                 <th>
                     @Html.SortableHeaderFor(model => model.Email)
+                </th>
+
                 <th></th>
             </tr>
         </thead>
@@ -52,7 +54,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Matricula)
+                        @Html.DisplayFor(modelItem => item.Codigo)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Cedula)
@@ -68,10 +70,11 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
+                    </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Matricula }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Matricula }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Matricula })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Codigo }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Codigo }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Codigo })
                     </td>
                 </tr>
             }
