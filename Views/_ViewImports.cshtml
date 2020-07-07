@@ -2,8 +2,11 @@
 @using AprendiendoWeb.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *,DNTBreadCrumb.Core
+@using Microsoft.Extensions.Options
+@using AprendiendoWeb.Models.ConstantesSistema
 
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
 
-
+@inject IOptions<GlobalSettings> _gSettings
+@inject IOptions<AppSettings> _appSettings

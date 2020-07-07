@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AprendiendoWeb.Models.ConstantesSistema;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,9 @@ namespace AprendiendoWeb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //Inyecta los datos de las constantes de la app.
+            services.Configure<GlobalSettings>(Configuration);
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
